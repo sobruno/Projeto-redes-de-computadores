@@ -1,120 +1,78 @@
-📡 Sistema de Inventário e Monitoramento de Computadores em Rede
+# Sistema de Inventário e Monitoramento de Computadores em Rede
 
-Projeto desenvolvido para a disciplina de Redes de Computadores, com foco na construção de um sistema Cliente/Servidor capaz de realizar descoberta automática de hosts na LAN, coleta de métricas de hardware e sistema operacional, consolidação de dados no servidor e execução de ações remotas de forma segura.
+Projeto desenvolvido para a disciplina de **Redes de Computadores**, com o objetivo de implementar um sistema **cliente/servidor** capaz de realizar descoberta automática de computadores em uma rede local, coletar métricas de hardware e sistema operacional, consolidar essas informações em um servidor central e permitir ações remotas de forma segura.
 
-🎯 Objetivo
+---
+
+## Objetivo
 
 Desenvolver um sistema cliente/servidor que permita:
 
-Descoberta automática de computadores na rede local
+- Descoberta automática de clientes na rede local (LAN)
+- Coleta periódica de informações de hardware e sistema operacional
+- Consolidação e visualização dos dados no servidor
+- Monitoramento de clientes online e offline
+- Execução de comandos administrativos remotos
+- Comunicação segura com criptografia ponta a ponta
 
-Coleta periódica de informações de hardware e sistema
+---
 
-Consolidação e visualização dos dados no servidor
+## Arquitetura do Sistema
 
-Execução de comandos administrativos remotos
+O sistema segue o modelo **Cliente/Servidor**, utilizando **sockets puros (TCP e UDP)** e um protocolo de comunicação próprio.
 
-Comunicação segura com criptografia ponta a ponta
+- **Cliente**: executado nas máquinas monitoradas, responsável pela coleta de dados e execução de comandos remotos
+- **Servidor**: responsável pela descoberta dos clientes, consolidação das informações, visualização dos dados e auditoria
 
-🧩 Arquitetura do Sistema
+A comunicação segura é implementada por meio de criptografia híbrida:
+- **RSA** para troca segura de chaves
+- **AES-GCM** para transmissão de dados com confidencialidade e integridade
 
-O projeto segue o modelo Cliente/Servidor, utilizando sockets TCP e UDP com protocolo próprio.
+---
 
-Cliente: Executado nas máquinas monitoradas
+## Funcionalidades
 
-Servidor: Responsável pela descoberta, coleta, consolidação, visualização e auditoria
+### Coleta de Dados no Cliente
+- Quantidade de processadores / núcleos
+- Memória RAM livre
+- Espaço em disco livre
+- Interfaces de rede (IP, status UP/DOWN e tipo)
+- Identificação do sistema operacional
 
-A comunicação é protegida por criptografia híbrida:
+### Servidor e Consolidação
+- Dashboard em terminal com listagem dos clientes
+- Exibição do sistema operacional, IP principal e última atualização
+- Identificação de clientes online e offline
+- Detalhamento completo de um cliente selecionado
+- Exportação de relatórios em formato **CSV** ou **JSON**
 
-RSA para troca segura de chaves
+### Monitoramento de Status
+- Um cliente é considerado offline após 30 segundos sem resposta ao mecanismo de comunicação
 
-AES-GCM para comunicação de dados com confidencialidade e integridade
+---
 
-⚙️ Funcionalidades
-🖥️ Coleta de Dados no Cliente
+## Segurança
 
-Quantidade de CPUs / núcleos
+- Comunicação criptografada ponta a ponta
+- Autenticação dos clientes
+- Controle de acesso por tipo de comando
+- Auditoria no servidor com registro de ações executadas, cliente envolvido e data/hora
 
-Memória RAM livre
+---
 
-Espaço em disco livre
+## Funcionalidades Bônus
 
-Interfaces de rede (IP, status UP/DOWN, tipo)
+- Controle remoto do mouse (movimento e clique)
+- Controle remoto do teclado
 
-Identificação do sistema operacional
+As ações remotas são executadas apenas após autenticação e por meio de comunicação segura.
 
-🗄️ Servidor e Consolidação
+---
 
-Dashboard em terminal com lista de clientes
+## Tecnologias Utilizadas
 
-Identificação de clientes online e offline
-
-Última atualização de cada cliente
-
-Detalhamento completo de um cliente selecionado
-
-Exportação de relatórios em CSV ou JSON
-
-🕵️ Monitoramento de Status
-
-Cliente é considerado offline após 30 segundos sem resposta
-
-Atualização automática de status
-
-🔐 Segurança
-
-Comunicação criptografada ponta a ponta
-
-Autenticação de clientes
-
-Controle de acesso por tipo de comando
-
-Auditoria no servidor com registro de:
-
-Ação executada
-
-Cliente envolvido
-
-Data e hora
-
-🖱️🎹 Funcionalidades Bônus
-
-Controle remoto do mouse (movimento e clique)
-
-Controle remoto do teclado
-
-Essas ações são executadas apenas mediante autenticação e comunicação segura.
-
-🛠️ Tecnologias Utilizadas
-
-Python 3
-
-Sockets TCP e UDP
-
-Programação Orientada a Objetos
-
-Bibliotecas criptográficas (RSA e AES-GCM)
-
-JSON e CSV para serialização de dados
-
-▶️ Como Executar
-1️⃣ Iniciar o Servidor
-python servidor.py
-2️⃣ Iniciar o Cliente
-python cliente.py
-
-Os clientes serão descobertos automaticamente na rede local.
-
-📊 Dashboard (Servidor)
-
-No menu do servidor é possível:
-
-Listar clientes conectados
-
-Atualizar dados manualmente
-
-Detalhar um cliente específico
-
-Executar comandos remotos
-
-Exportar relatórios
+- Python 3
+- Sockets TCP e UDP
+- Programação Orientada a Objetos
+- Criptografia RSA e AES-GCM
+- JSON e CSV para serialização e exportação de dados
